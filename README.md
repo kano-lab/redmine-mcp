@@ -1,6 +1,6 @@
-# Kanolab Redmine Wiki MCP Server
+# Redmine Wiki MCP Server
 
-Redmine WikiのAPIを使用したModel Context Protocol (MCP) サーバーです。Claude DesktopやClaude Code等のMCPクライアントからKanolabのRedmine Wiki情報にアクセスできます。
+Redmine WikiのAPIを使用したModel Context Protocol (MCP) サーバーです。Claude DesktopやClaude Code等のMCPクライアントからRedmine Wiki情報にアクセスできます。
 
 ## MCPとは
 
@@ -67,9 +67,9 @@ Claude Desktopの設定ファイルにMCPサーバーを追加します。
 ```json
 {
   "mcpServers": {
-    "kanolab-redmine": {
+    "redmine-wiki": {
       "command": "node",
-      "args": ["/path/to/kanolab-redmine-mcp/dist/index.js"],
+      "args": ["/path/to/redmine-mcp/dist/index.js"],
       "env": {
         "REDMINE_URL": "https://your-redmine-domain.com",
         "API_KEY": "your_redmine_api_key",
@@ -85,9 +85,9 @@ Claude Desktopの設定ファイルにMCPサーバーを追加します。
 ```json
 {
   "mcpServers": {
-    "kanolab-redmine": {
+    "redmine-wiki": {
       "command": "node",
-      "args": ["/path/to/kanolab-redmine-mcp/dist/index.js"]
+      "args": ["/path/to/redmine-mcp/dist/index.js"]
     }
   }
 }
@@ -102,9 +102,9 @@ Claude Codeの設定ファイル（`~/.claude/settings.json`）にMCPサーバ�
 ```json
 {
   "mcpServers": {
-    "kanolab-redmine": {
+    "redmine-wiki": {
       "command": "node",
-      "args": ["/path/to/kanolab-redmine-mcp/dist/index.js"],
+      "args": ["/path/to/redmine-mcp/dist/index.js"],
       "env": {
         "REDMINE_URL": "https://your-redmine-domain.com",
         "API_KEY": "your_redmine_api_key",
