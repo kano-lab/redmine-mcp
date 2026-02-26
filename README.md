@@ -115,6 +115,20 @@ Claude Codeの設定ファイル（`~/.claude/settings.json`）にMCPサーバ�
 }
 ```
 
+## HTTPモードでの使用方法
+
+`--http`フラグを付けて起動すると、Streamable HTTPトランスポートで動作します：
+
+```bash
+node dist/index.js --http
+```
+
+デフォルトではポート3000で起動し、`http://0.0.0.0:3000/mcp`でリクエストを受け付けます。`PORT`環境変数でポートを変更できます：
+
+```bash
+PORT=8080 node dist/index.js --http
+```
+
 ## 開発
 
 ### 開発モードで実行
@@ -184,7 +198,7 @@ npm run build
 ## 技術情報
 
 - **MCP SDK**: [@modelcontextprotocol/sdk](https://github.com/modelcontextprotocol/typescript-sdk) v1.25.x
-- **トランスポート**: stdio (標準入出力)
+- **トランスポート**: stdio (標準入出力) / Streamable HTTP (`--http`フラグで切替)
 - **プロトコルバージョン**: 2024-11-05
 
 ## 参考リンク
