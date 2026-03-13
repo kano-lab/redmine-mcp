@@ -28,6 +28,15 @@ async function main(): Promise<void> {
       const app = express();
       app.use(express.json());
 
+      // Accept: */* など不完全なヘッダーを正規化（mcpo などのクライアント対応）
+      app.use((req, _res, next) => {
+        const accept = req.headers['accept'] ?? '';
+        if (!accept.includes('text/event-stream')) {
+          req.headers['accept'] = 'application/json, text/event-stream';
+        }
+        next();
+      });
+
       app.post("/mcp", async (req, res) => {
         const reqServer = McpServerFactory.create();
         try {
