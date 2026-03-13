@@ -27,9 +27,24 @@ async function main(): Promise<void> {
     if (useHttp) {
       const app = express();
       app.use(express.json());
-      const transport = new StreamableHTTPServerTransport();
-      await server.connect(transport);
-      app.use("/mcp", (req, res) => transport.handleRequest(req, res));
+
+      app.post("/mcp", async (req, res) => {
+        const reqServer = McpServerFactory.create();
+        try {
+          const transport = new StreamableHTTPServerTransport({ sessionIdGenerator: undefined });
+          await reqServer.connect(transport);
+          await transport.handleRequest(req, res, req.body);
+          res.on('close', () => {
+            transport.close();
+            reqServer.close();
+          });
+        } catch (error) {
+          if (!res.headersSent) {
+            res.status(500).json({ jsonrpc: '2.0', error: { code: -32603, message: 'Internal server error' }, id: null });
+          }
+        }
+      });
+
       const port = parseInt(process.env.PORT ?? "3000");
       app.listen(port, () => {
         console.error(`Kanolab Redmine MCP server started on http://0.0.0.0:${port}/mcp`);
